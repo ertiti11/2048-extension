@@ -12,17 +12,18 @@ document.addEventListener("keydown", function (event) {
 });
 
 var tablero = JSON.parse(window.localStorage.getItem("gameState"));
-var tableroantiguo = JSON.parse(window.localStorage.getItem("gameState"));
+var tableroantiguo = [JSON.parse(window.localStorage.getItem("gameState"))]
 
 function verTablero() {
-  tableroantiguo = tablero;
+  tableroantiguo.push(tablero)
   tablero = JSON.parse(window.localStorage.getItem("gameState"));
   console.log(tablero);
   console.log(tableroantiguo);
 }
 
 function deshacer() {
-  window.localStorage.setItem("gameState", JSON.stringify(tableroantiguo));
+    console.assert( JSON.stringify(tableroantiguo[tableroantiguo.length-1]) === tablero );
+  window.localStorage.setItem("gameState", JSON.stringify(tableroantiguo[tableroantiguo.length-1]));
   location.reload();
 }
 
